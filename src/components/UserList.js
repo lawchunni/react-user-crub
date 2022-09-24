@@ -5,6 +5,10 @@ const UserList = ({error, isLoaded, users, handleUserAction}) => {
   const handlePick = (e, user) => {
     if(e.target.tagName !== 'BUTTON') {
       handleUserAction('show', user);
+    } else if(e.target.innerText === 'Edit') {
+      handleUserAction('edit', user);
+    } else if(e.target.innerText === 'Delete') {
+      handleUserAction('delete', user);
     }
   }
 
