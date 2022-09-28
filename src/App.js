@@ -30,7 +30,8 @@ function App() {
     .then(
       (result) => {
         setIsLoaded(true);
-        setUsers(result);
+        const data = result.results.sort((a, b) => b.id - a.id);
+        setUsers(data);
       },
       (error) => {
         setIsLoaded(true);
@@ -92,7 +93,7 @@ function App() {
         </div>
       </div>
 
-      <UserList error={error} isLoaded={isLoaded} users={users.results} handleUserAction={handleUserAction} />
+      <UserList error={error} isLoaded={isLoaded} users={users} handleUserAction={handleUserAction} />
 
       {(() => {
         if(action === 'form') {
