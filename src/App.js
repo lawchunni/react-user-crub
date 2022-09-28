@@ -85,6 +85,7 @@ function App() {
     <div>
       <Header />
       <Messages successMsg={successMsg} errMsg={errMsg} setSuccessMsg={setSuccessMsg} setErrMsg={setErrMsg} />
+
       <div className="container">
         <div className="wrapper">
           <button className="button is-medium is-info" onClick={() => handleUserAction('form', {})}>Add User</button>
@@ -93,14 +94,16 @@ function App() {
 
       <UserList error={error} isLoaded={isLoaded} users={users.results} handleUserAction={handleUserAction} />
 
-      <UserDetailsModal user={action === 'show' ? user : null} handleUserAction={handleUserAction} />
-      
       {(() => {
         if(action === 'form') {
           return (
             <FormModal user={user} handleUserAction={handleUserAction} handleFormSubmit={handleFormSubmit} />
           )
-        } 
+        } else if(action === 'show') {
+          return (
+            <UserDetailsModal user={user} handleUserAction={handleUserAction} />
+          ) 
+        }
       })()}
     </div>
   )

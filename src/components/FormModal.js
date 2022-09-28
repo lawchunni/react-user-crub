@@ -30,7 +30,6 @@ const FormModal = ({user, handleUserAction, handleFormSubmit}) => {
     
   }
 
-
   return (
     <div className="modal" style={{display: 'block'}}>
       <div className="modal-background" onClick={() => handleUserAction('', {})}></div>
