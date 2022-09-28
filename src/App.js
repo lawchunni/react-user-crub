@@ -42,27 +42,26 @@ function App() {
   const handleUserAction = (action, user) => {
     setAction(action);
     setUser(user);
+    if (action !== 'success') {
+      resetMsg();
+    }
+  }
+
+  const resetMsg = () => {
     setSuccessMsg('');
     setErrMsg('');
   }
 
-  const handleFormSubmit = (method, user) => {
-    // init state
-    setErrMsg('');
-    setSuccessMsg('');
+  const handleFormSubmit = (method, data) => {
 
-    const data = {
-      name: user.name.value,
-      email: user.email.value,
-      phone: user.phone.value
-    }
+    resetMsg();
 
     if(!data.name || !data.email || !data.phone) {
       setErrMsg('All fields required');
       return;
     }
 
-    // update database
+    // create or update data in database
     fetch(api, {
       method: method,
       body: JSON.stringify(data),
@@ -74,6 +73,7 @@ function App() {
     .then(json => {
       if(json.status === 200 || json.status === 201) {
         setSuccessMsg(json.message);
+        handleUserAction('success', {});
         getAllUser();
       } else {
         setErrMsg(json.message);
@@ -87,18 +87,20 @@ function App() {
       <Messages successMsg={successMsg} errMsg={errMsg} setSuccessMsg={setSuccessMsg} setErrMsg={setErrMsg} />
       <div className="container">
         <div className="wrapper">
-          <button className="button is-medium is-info" onClick={() => setAction('create')}>Add User</button>
+          <button className="button is-medium is-info" onClick={() => handleUserAction('form', {})}>Add User</button>
         </div>
       </div>
+
       <UserList error={error} isLoaded={isLoaded} users={users.results} handleUserAction={handleUserAction} />
+
       <UserDetailsModal user={action === 'show' ? user : null} handleUserAction={handleUserAction} />
       
       {(() => {
-        if(action === 'create') {
+        if(action === 'form') {
           return (
-            <FormModal setAction={setAction} handleFormSubmit={handleFormSubmit} />
+            <FormModal user={user} handleUserAction={handleUserAction} handleFormSubmit={handleFormSubmit} />
           )
-        }
+        } 
       })()}
     </div>
   )

@@ -6,7 +6,7 @@ const UserList = ({error, isLoaded, users, handleUserAction}) => {
     if(e.target.tagName !== 'BUTTON') {
       handleUserAction('show', user);
     } else if(e.target.innerText === 'Edit') {
-      handleUserAction('edit', user);
+      handleUserAction('form', user);
     } else if(e.target.innerText === 'Delete') {
       handleUserAction('delete', user);
     }
