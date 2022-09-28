@@ -49,3 +49,11 @@ table {
     -webkit-transform: translateY(-50%);
   }
 }
+
+.notification {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
