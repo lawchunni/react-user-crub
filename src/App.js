@@ -43,9 +43,14 @@ function App() {
   const handleUserAction = (action, user) => {
     setAction(action);
     setUser(user);
-    if (action !== 'success') {
+    if (action !== 'success' && action !== 'delete') {
       resetMsg();
+    } else if (action === 'delete') {
+      if(window.confirm(`Are you sure to delete user ${user.name}`)) {
+        handleRequest('DELETE', user);
+      }
     }
+
   }
 
   const resetMsg = () => {
@@ -63,6 +68,10 @@ function App() {
     }
 
     // create or update data in database
+    handleRequest(method, data);
+  }
+
+  const handleRequest = (method, data) => {
     fetch(api, {
       method: method,
       body: JSON.stringify(data),
