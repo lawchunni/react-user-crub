@@ -8,7 +8,7 @@ import Messages from './components/Messages.js';
 
 function App() {
 
-  const api = 'http://localhost:8000/';
+  const api = 'http://user-api.jennypuichingchung.com/';
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
