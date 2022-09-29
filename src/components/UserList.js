@@ -2,6 +2,11 @@ import React from "react";
 
 const UserList = ({error, isLoaded, users, handleUserAction}) => {
 
+  /**
+   * handle user table click event 
+   * @param {*} e table event
+   * @param {*} user single user data
+   */
   const handlePick = (e, user) => {
     if(e.target.tagName !== 'BUTTON') {
       handleUserAction('show', user);

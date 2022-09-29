@@ -24,6 +24,9 @@ function App() {
     getAllUser();
   }, []);
 
+  /**
+   * get all users info from database
+   */
   const getAllUser = () => {
     fetch(api)
     .then(res => res.json())
@@ -40,24 +43,41 @@ function App() {
     )
   }
 
-  const handleUserAction = (action, user) => {
-    setAction(action);
-    setUser(user);
-    if (action !== 'success' && action !== 'delete') {
+  /**
+   * handle user in app actions
+   * @param {*} act in app action - show, form, success, delete
+   * @param {*} user single user data
+   */
+  const handleUserAction = (act, user) => {
+
+    if(act !== 'success' && act !== 'delete') {
       resetMsg();
-    } else if (action === 'delete') {
-      if(window.confirm(`Are you sure to delete user ${user.name}`)) {
+    } else if (act === 'delete') {
+      if(window.confirm(`Are you sure to delete user ${user.name}?`)) {
+        // HTTP request - delete
         handleRequest('DELETE', user);
       }
     }
 
+    setAction(act);
+    setUser(user);
+    
   }
 
+  /**
+   * reset notification messages
+   */
   const resetMsg = () => {
     setSuccessMsg('');
     setErrMsg('');
   }
 
+  /**
+   * handle create and update form submission
+   * @param {*} method create & update
+   * @param {*} data single user data
+   * @returns 
+   */
   const handleFormSubmit = (method, data) => {
 
     resetMsg();
@@ -71,6 +91,11 @@ function App() {
     handleRequest(method, data);
   }
 
+  /**
+   * function to handle HTTP request
+   * @param {*} method create, update & delete
+   * @param {*} data single user data
+   */
   const handleRequest = (method, data) => {
     fetch(api, {
       method: method,

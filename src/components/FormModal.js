@@ -27,7 +27,6 @@ const FormModal = ({user, handleUserAction, handleFormSubmit}) => {
 
       handleFormSubmit('POST', data);
     }
-    
   }
 
   return (
