@@ -8,7 +8,7 @@ import Messages from './components/Messages.js';
 
 function App() {
 
-  const api = 'http://user-api.jennypuichingchung.com/';
+  const api = process.env.REACT_APP_USER_API_URL;
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,9 +19,10 @@ function App() {
   const [successMsg, setSuccessMsg] = useState('');
   const [errMsg, setErrMsg] = useState('');
 
-
+  
   useEffect(() => {
     getAllUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
