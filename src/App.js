@@ -130,17 +130,10 @@ function App() {
 
       <UserList error={error} isLoaded={isLoaded} users={users} handleUserAction={handleUserAction} />
 
-      {(() => {
-        if(action === 'form') {
-          return (
-            <FormModal user={user} handleUserAction={handleUserAction} handleFormSubmit={handleFormSubmit} />
-          )
-        } else if(action === 'show') {
-          return (
-            <UserDetailsModal user={user} handleUserAction={handleUserAction} />
-          ) 
-        }
-      })()}
+      {(action === 'form') && <FormModal user={user} handleUserAction={handleUserAction} handleFormSubmit={handleFormSubmit} />}
+
+      {(action === 'show') && <UserDetailsModal user={user} handleUserAction={handleUserAction} />}
+
     </div>
   )
 }
